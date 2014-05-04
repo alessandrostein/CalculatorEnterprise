@@ -5,7 +5,7 @@
  */
 package calculator.controllers;
 
-import calculator.ejbs.CalculatorBeanLocal;
+import calculator.ejbs.interfaces.CalculatorBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;

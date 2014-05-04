@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package calculator.ejbs;
+package calculator.ejbs.interfaces;
 
 import javax.ejb.Local;
 

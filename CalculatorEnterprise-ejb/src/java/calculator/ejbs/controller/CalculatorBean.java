@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package calculator.ejbs;
+package calculator.ejbs.controller;
 
+import calculator.ejbs.interfaces.CalculatorBeanLocal;
 import javax.ejb.Stateless;
 
 /**
