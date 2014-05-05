@@ -9,7 +9,6 @@ import calculator.ejbs.entity.User;
 import calculator.ejbs.interfaces.UserFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alessandro
  */
-@WebServlet(name = "ListUser", urlPatterns = {"/ListUser"})
-public class ListUser extends HttpServlet {
+@WebServlet(name = "CreateUser", urlPatterns = {"/CreateUser"})
+public class CreateUser extends HttpServlet {
 
     @EJB
     UserFacadeLocal userF;
@@ -38,33 +37,27 @@ public class ListUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User o = new User();
+        o.setName(request.getParameter("name"));
         response.setContentType("text/html;charset=UTF-8");
-        List<User> users = userF.findAll();
         PrintWriter out = response.getWriter();
-
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListUser</title>");
-            out.println("</head>");
-            out.println("<body>");
-            User o;
-             for (int i = 0; i < users.size(); i++) {
-             o = (User) users.get(i);
-             out.println("<h1>" + o.getId() +"</h1>");
-             out.println("<h1>" + o.getName() + "</h1>");
-             }
-            out.println("<h1>Servlet ListUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }finally {
-            out.close();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet ListUser</title>");
+        out.println("</head>");
+        out.println("<body>");
+        if (o.getName() == null) {
+            out.println("<h1>Adicione umm usuario na url. Ex: CreateUser?name=NomeAqui</h1>");
+        } else {
+            out.println("<h1>Usuário Adicionado: " + o.getName() + "</h1>");
+            userF.create(o);
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
