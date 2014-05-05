@@ -55,6 +55,7 @@ public class CreateRole extends HttpServlet {
         }
         out.println("</body>");
         out.println("</html>");
+        response.sendRedirect("ListRole");
 
     }
 
