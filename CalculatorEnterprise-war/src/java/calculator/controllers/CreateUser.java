@@ -48,14 +48,21 @@ public class CreateUser extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (o.getName() == null) {
-            out.println("<h1>Adicione umm usuario na url. Ex: CreateUser?name=NomeAqui</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>Usuario</label>");
+            out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+
+            //out.println("<h1>Adicione umm usuario na url. Ex: CreateUser?name=NomeAqui</h1>");
         } else {
             out.println("<h1>Usuário Adicionado: " + o.getName() + "</h1>");
             userF.create(o);
+            response.sendRedirect("ListUser");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListUser");
 
     }
 

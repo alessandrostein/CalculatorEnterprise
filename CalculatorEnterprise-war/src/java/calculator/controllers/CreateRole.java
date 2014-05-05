@@ -48,15 +48,22 @@ public class CreateRole extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (o.getName() == null) {
-            out.println("<h1>Adicione uma regra na url. Ex: CreateRole?name=NomeAqui</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>Regra</label>");
+            out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            
+            //out.println("<h1>Adicione uma regra na url. Ex: CreateRole?name=NomeAqui</h1>");
         } else {
             out.println("<h1>Regra Adicionado: " + o.getName() + "</h1>");
             roleF.create(o);
+            response.sendRedirect("ListRole");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListRole");
-
+        
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

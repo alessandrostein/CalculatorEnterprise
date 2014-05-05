@@ -54,11 +54,10 @@ public class ListUserRole extends HttpServlet {
             UserRole o;
             for (int i = 0; i < userrole.size(); i++) {
                 o = (UserRole) userrole.get(i);
-                out.println("<h1>ID" + o.getId() + "</h1>");
-                out.println("<h1>IDUSER" + o.getUserid() + "</h1>");
-                out.println("<h1>IDROLE" + o.getRoleid() + "</h1>");
+                out.println("<h1>ID: " + o.getId() + " - IDUSER: " + o.getUserid() + " - IDROLE: " + o.getRoleid() + "</h1>");
             }
             out.println("<h1>Servlet List User Role at " + request.getContextPath() + "</h1>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
             out.println("</body>");
             out.println("</html>");
         } finally {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package calculator.controllers;
 
 import calculator.ejbs.entity.UserRole;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RemoveUserRole", urlPatterns = {"/RemoveUserRole"})
 public class RemoveUserRole extends HttpServlet {
-    
+
     @EJB
     UserRoleFacadeLocal userroleF;
 
@@ -38,9 +37,9 @@ public class RemoveUserRole extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String userroleid = request.getParameter("userroleid");
-                
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");
@@ -50,17 +49,22 @@ public class RemoveUserRole extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (userroleid == null) {
-            out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUserRole?userroleid=IDDOUSERROLE</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>ID UserRole</label>");
+            out.println("<input type=\"TEXT\" id=\"userroleid\" name=\"userroleid\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            //out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUserRole?userroleid=IDDOUSERROLE</h1>");
         } else {
             UserRole o = new UserRole();
             o.setId(Integer.parseInt(userroleid));
             userroleF.remove(o);
             out.println("<h1>Removido Usuario da Regra " + o.toString() + "</h1>");
-            
+            response.sendRedirect("ListUserRole");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListUserRole");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

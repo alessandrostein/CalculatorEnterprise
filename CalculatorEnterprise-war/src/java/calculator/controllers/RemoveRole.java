@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package calculator.controllers;
 
 import calculator.ejbs.entity.Role;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RemoveRole", urlPatterns = {"/RemoveRole"})
 public class RemoveRole extends HttpServlet {
-    
+
     @EJB
     RoleFacadeLocal roleF;
 
@@ -38,9 +37,9 @@ public class RemoveRole extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String roleid = request.getParameter("roleid");
-                
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");
@@ -50,17 +49,22 @@ public class RemoveRole extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (roleid == null) {
-            out.println("<h1>Adicione o ID da regra na url. Ex: RemoveRole?roleid=IDDAROLE</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>ID Regra</label>");
+            out.println("<input type=\"TEXT\" id=\"roleid\" name=\"roleid\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            //out.println("<h1>Adicione o ID da regra na url. Ex: RemoveRole?roleid=IDDAROLE</h1>");
         } else {
             Role o = new Role();
             o.setId(Integer.parseInt(roleid));
             roleF.remove(o);
             out.println("<h1>Regra removida: " + o.getName() + "</h1>");
-            
+            response.sendRedirect("ListRole");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListRole");
 
     }
 

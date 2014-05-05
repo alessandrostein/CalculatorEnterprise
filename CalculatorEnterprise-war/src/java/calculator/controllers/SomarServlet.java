@@ -53,6 +53,7 @@ public class SomarServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet SomarServlet at " + request.getContextPath() + "</h1>");
             out.println("Soma: " + resultado);
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
             out.println("</body>");
             out.println("</html>");
         } finally {

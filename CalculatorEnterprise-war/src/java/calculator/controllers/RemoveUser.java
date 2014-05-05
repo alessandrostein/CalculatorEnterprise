@@ -37,9 +37,9 @@ public class RemoveUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String userid = request.getParameter("userid");
-                
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");
@@ -49,17 +49,22 @@ public class RemoveUser extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (userid == null) {
-            out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUser?userid=IDDOUSER</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>ID User</label>");
+            out.println("<input type=\"TEXT\" id=\"userid\" name=\"userid\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            //out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUser?userid=IDDOUSER</h1>");
         } else {
             User o = new User();
             o.setId(Integer.parseInt(userid));
             userF.remove(o);
             out.println("<h1>Usuário removido: " + o.getName() + "</h1>");
-            
+            response.sendRedirect("ListUser");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListUser");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

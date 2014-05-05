@@ -50,17 +50,26 @@ public class CreateUserRole extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         if (userid == null || roleid == null) {
-            out.println("<h1>Adicione o ID do usuario e da Role na url. Ex: CreateUserRole?userid=IDDAUSER&roleid=IDDAROLE</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>ID Usuario</label>");
+            out.println("<input type=\"TEXT\" id=\"userid\" name=\"userid\" size=\"40\" />");
+            out.println("<label>ID Regra</label>");
+            out.println("<input type=\"TEXT\" id=\"roleid\" name=\"roleid\" size=\"40\" />");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+
+            //out.println("<h1>Adicione o ID do usuario e da Role na url. Ex: CreateUserRole?userid=IDDAUSER&roleid=IDDAROLE</h1>");
         } else {
             UserRole o = new UserRole();
             o.setUserid(Integer.parseInt(userid));
             o.setRoleid(Integer.parseInt(roleid));
             userroleF.create(o);
             out.println("<h1>Regra adicionado ao usuario: </h1>");
+            response.sendRedirect("ListUserRole");
         }
         out.println("</body>");
         out.println("</html>");
-        response.sendRedirect("ListUserRole");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
