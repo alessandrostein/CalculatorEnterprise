@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/CreateUser.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/web/index.html</file>
-            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/SomarServlet.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/conf/MANIFEST.MF</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/nbproject/build-impl.xml</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/SomarServlet.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/ListUser.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/conf/WEB-INF/glassfish-web.xml</file>
         </group>
     </open-files>
 </project-private>
