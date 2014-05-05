@@ -6,6 +6,7 @@
 package calculator.controllers;
 
 import calculator.ejbs.entity.User;
+import calculator.ejbs.interfaces.CalculatorBeanLocal;
 import calculator.ejbs.interfaces.UserFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,9 +41,9 @@ public class ListUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         List<User> users = userF.findAll();
-        try (
-                
-            PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+
+        try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -51,14 +52,16 @@ public class ListUser extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             User o;
-            for (int i = 0; i < users.size(); i++) {
-                o = (User) users.get(i);
-                out.println("<h1>" + o.getId() +"</h1>");
-                out.println("<h1>" + o.getName() + "</h1>");
-            }
+             for (int i = 0; i < users.size(); i++) {
+             o = (User) users.get(i);
+             out.println("<h1>" + o.getId() +"</h1>");
+             out.println("<h1>" + o.getName() + "</h1>");
+             }
             out.println("<h1>Servlet ListUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+        }finally {
+            out.close();
         }
     }
 
