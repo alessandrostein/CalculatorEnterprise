@@ -5,12 +5,8 @@
  */
 package calculator.controllers;
 
-import calculator.ejbs.entity.Role;
 import calculator.ejbs.entity.User;
-import calculator.ejbs.entity.UserRole;
-import calculator.ejbs.interfaces.RoleFacadeLocal;
 import calculator.ejbs.interfaces.UserFacadeLocal;
-import calculator.ejbs.interfaces.UserRoleFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -24,18 +20,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alessandro
  */
-@WebServlet(name = "CreateUserRole", urlPatterns = {"/CreateUserRole"})
-public class CreateUserRole extends HttpServlet {
-
-    @EJB
-    UserRoleFacadeLocal userroleF;
+@WebServlet(name = "EditUser", urlPatterns = {"/EditUser"})
+public class EditUser extends HttpServlet {
 
     @EJB
     UserFacadeLocal userF;
-
-    @EJB
-    RoleFacadeLocal roleF;
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,59 +37,34 @@ public class CreateUserRole extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String userid = request.getParameter("userid");
-        String roleid = request.getParameter("roleid");
+        Integer userid = Integer.parseInt(request.getParameter("userid"));
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        /* TODO output your page here. You may use following sample code. */
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
-        out.println("<title>Servlet Create role for user </title>");
+        out.println("<title>Servlet EditUser</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+        out.println("<label>Role ID " + userid + "</label>");
 
-        if (userid == null || roleid == null) {
-            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
-            out.println("<label>ID Usuario</label>");
-            out.println("<input type=\"TEXT\" id=\"userid\" name=\"userid\" size=\"40\" />");
-            out.println("<label>ID Regra</label>");
-            out.println("<input type=\"TEXT\" id=\"roleid\" name=\"roleid\" size=\"40\" />");
-            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
-            out.println("</form>");
-            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+        User uf = userF.find(userid);
 
-            //out.println("<h1>Adicione o ID do usuario e da Role na url. Ex: CreateUserRole?userid=IDDAUSER&roleid=IDDAROLE</h1>");
-        } else {
-            /*User u = new User();
-            u.setId(Integer.parseInt(userid));
+        out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + uf.getName() + ">");
+        out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+        out.println("</form>");
+        out.println("<a href=\"index.html\">Pagina Inicial</a>");
 
-            u = userF.find(u);
-
-            Role r = new Role();
-            r.setId(Integer.parseInt(roleid));
-
-            r = roleF.find(r);
-            if (u == null || r == null) {*/
-
-                UserRole o = new UserRole();
-                o.setUserid(Integer.parseInt(userid));
-                o.setRoleid(Integer.parseInt(roleid));
-                userroleF.create(o);
-                out.println("<h1>Regra adicionado ao usuario: </h1>");
-                response.sendRedirect("ListUserRole");
-        /*    } else {
-                out.println("<h1> Dados incorretos</h1>");
-                out.println("<a href=\"index.html\">Pagina Inicial</a>");
-            }*/
-
-        }
-
+        out.println("<h1>Servlet EditUser at " + request.getContextPath() + "</h1>");
         out.println("</body>");
         out.println("</html>");
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

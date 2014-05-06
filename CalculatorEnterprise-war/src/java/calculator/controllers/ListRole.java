@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package calculator.controllers;
 
 import calculator.ejbs.entity.Role;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ListRole", urlPatterns = {"/ListRole"})
 public class ListRole extends HttpServlet {
-    
+
     @EJB
     RoleFacadeLocal roleF;
 
@@ -52,16 +51,17 @@ public class ListRole extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             Role o;
-             for (int i = 0; i < roles.size(); i++) {
-             o = (Role) roles.get(i);
-             out.println("<h1>" + o.getId() + " - " + o.getName()  + "</h1>");
-             //out.println("<h1>" + o.getName() + "</h1>");
-             }
+            for (int i = 0; i < roles.size(); i++) {
+                
+                o = (Role) roles.get(i);
+                out.println("<h1>" + o.getId() + " - " + o.getName() + "<a href=EditRole?roleid=" + o.getId() + "> Editar</a></h1>");
+                //out.println("<a href=EditRole?roleid=" + o.getId() + ">Editar</a>");
+            }
             out.println("<h1>Servlet List Role at " + request.getContextPath() + "</h1>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
             out.println("</body>");
             out.println("</html>");
-        }finally {
+        } finally {
             out.close();
         }
     }
