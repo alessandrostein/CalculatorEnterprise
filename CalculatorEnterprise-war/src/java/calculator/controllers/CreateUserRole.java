@@ -81,7 +81,6 @@ public class CreateUserRole extends HttpServlet {
                 o.setUserid(Integer.parseInt(userid));
                 o.setRoleid(Integer.parseInt(roleid));
                 userroleF.create(o);
-                out.println("<h1>Regra adicionado ao usuario: </h1>");
                 response.sendRedirect("ListUserRole");
             }
 

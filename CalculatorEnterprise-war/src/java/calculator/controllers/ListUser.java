@@ -53,10 +53,9 @@ public class ListUser extends HttpServlet {
             User o;
             for (int i = 0; i < users.size(); i++) {
                 o = (User) users.get(i);
-                //out.println("<h1>" + o.getId() + "</h1>");
-                out.println("<h1>" + o.getId() + " - " + o.getName() + "<a href=EditUser?userid=" + o.getId() + "> Editar</a></h1>");
-                //out.println("<h1>" + o.getName() + "</h1>");
+                out.println("<h1>" + o.getId() + " - " + o.getName() + "<a href=EditUser?userid=" + o.getId() + " >Editar</a></h1>");
             }
+            out.println("<h1>Total " + userF.count() + "</h1>");
             out.println("<h1>Servlet ListUser at " + request.getContextPath() + "</h1>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
             out.println("</body>");

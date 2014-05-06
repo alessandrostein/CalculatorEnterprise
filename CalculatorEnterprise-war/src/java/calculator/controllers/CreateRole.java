@@ -57,7 +57,6 @@ public class CreateRole extends HttpServlet {
             
             //out.println("<h1>Adicione uma regra na url. Ex: CreateRole?name=NomeAqui</h1>");
         } else {
-            out.println("<h1>Regra Adicionado: " + o.getName() + "</h1>");
             roleF.create(o);
             response.sendRedirect("ListRole");
         }

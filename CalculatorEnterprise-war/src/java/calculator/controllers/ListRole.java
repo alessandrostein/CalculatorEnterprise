@@ -52,11 +52,10 @@ public class ListRole extends HttpServlet {
             out.println("<body>");
             Role o;
             for (int i = 0; i < roles.size(); i++) {
-                
                 o = (Role) roles.get(i);
-                out.println("<h1>" + o.getId() + " - " + o.getName() + "<a href=EditRole?roleid=" + o.getId() + "> Editar</a></h1>");
-                //out.println("<a href=EditRole?roleid=" + o.getId() + ">Editar</a>");
+                out.println("<h1>" + o.getId() + " - " + o.getName() + "<a href=EditRole?roleid=" + o.getId() + " >Editar</a></h1>");
             }
+            out.println("<h1>Total " + roleF.count() + "</h1>");
             out.println("<h1>Servlet List Role at " + request.getContextPath() + "</h1>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
             out.println("</body>");

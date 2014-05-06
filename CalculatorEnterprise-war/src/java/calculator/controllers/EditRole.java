@@ -38,7 +38,8 @@ public class EditRole extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Integer roleid = Integer.parseInt(request.getParameter("roleid"));
+        String roleid = request.getParameter("roleid");
+        String name = request.getParameter("name");
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -49,16 +50,25 @@ public class EditRole extends HttpServlet {
         out.println("<title>Servlet EditRole</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>Servlet EditRole at " + request.getContextPath() + "</h1>");
-        out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
-        out.println("<label>Regra ID " + roleid + "</label>");
-        
-        Role rf = roleF.find(roleid);
-        
-        out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + rf.getName() + ">");
-        out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
-        out.println("</form>");
-        out.println("<a href=\"index.html\">Pagina Inicial</a>");
+
+        if (name == null) {
+
+            out.println("<h1>Servlet EditRole at " + request.getContextPath() + "</h1>");
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>Regra ID " + roleid + "</label>");
+
+            Role rf = roleF.find(Integer.parseInt(roleid));
+
+            out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + rf.getName() + ">");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+        } else {
+            Role rf = roleF.find(Integer.parseInt(roleid));
+            rf.setName(name);
+            roleF.edit(rf);
+            response.sendRedirect("ListRole");
+        }
 
         out.println("</body>");
         out.println("</html>");

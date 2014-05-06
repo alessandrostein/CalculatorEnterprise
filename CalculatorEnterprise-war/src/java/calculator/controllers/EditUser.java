@@ -25,6 +25,7 @@ public class EditUser extends HttpServlet {
 
     @EJB
     UserFacadeLocal userF;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +38,8 @@ public class EditUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Integer userid = Integer.parseInt(request.getParameter("userid"));
+        String userid = request.getParameter("userid");
+        String name = request.getParameter("name");
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -48,17 +50,26 @@ public class EditUser extends HttpServlet {
         out.println("<title>Servlet EditUser</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
-        out.println("<label>Role ID " + userid + "</label>");
 
-        User uf = userF.find(userid);
+        if (name == null) {
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>Role ID " + userid + "</label>");
 
-        out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + uf.getName() + ">");
-        out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
-        out.println("</form>");
-        out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            User uf = userF.find(Integer.parseInt(userid));
 
-        out.println("<h1>Servlet EditUser at " + request.getContextPath() + "</h1>");
+            out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + uf.getName() + ">");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+
+            out.println("<h1>Servlet EditUser at " + request.getContextPath() + "</h1>");
+        } else {
+            User uf = userF.find(Integer.parseInt(userid));
+            uf.setName(name);
+            userF.edit(uf);
+            response.sendRedirect("ListRole");
+        }
+        
         out.println("</body>");
         out.println("</html>");
 

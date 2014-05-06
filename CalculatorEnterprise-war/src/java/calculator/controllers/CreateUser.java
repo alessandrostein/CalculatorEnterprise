@@ -57,7 +57,6 @@ public class CreateUser extends HttpServlet {
 
             //out.println("<h1>Adicione umm usuario na url. Ex: CreateUser?name=NomeAqui</h1>");
         } else {
-            out.println("<h1>Usuário Adicionado: " + o.getName() + "</h1>");
             userF.create(o);
             response.sendRedirect("ListUser");
         }

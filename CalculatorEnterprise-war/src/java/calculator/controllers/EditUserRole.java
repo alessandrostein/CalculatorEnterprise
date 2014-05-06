@@ -5,7 +5,11 @@
  */
 package calculator.controllers;
 
+import calculator.ejbs.entity.Role;
+import calculator.ejbs.entity.User;
 import calculator.ejbs.entity.UserRole;
+import calculator.ejbs.interfaces.RoleFacadeLocal;
+import calculator.ejbs.interfaces.UserFacadeLocal;
 import calculator.ejbs.interfaces.UserRoleFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,9 +26,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "EditUserRole", urlPatterns = {"/EditUserRole"})
 public class EditUserRole extends HttpServlet {
-    
+
     @EJB
     UserRoleFacadeLocal userroleF;
+    @EJB
+    UserFacadeLocal userF;
+    @EJB
+    RoleFacadeLocal roleF;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +46,9 @@ public class EditUserRole extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Integer userroleid = Integer.parseInt(request.getParameter("userroleid"));
+        String userroleid = request.getParameter("userroleid");
+        String userid = request.getParameter("userid");
+        String roleid = request.getParameter("roleid");
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -49,20 +59,38 @@ public class EditUserRole extends HttpServlet {
         out.println("<title>Servlet EditUserRole</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
-        out.println("<label>UserRole ID " + userroleid + "</label>");
 
-        UserRole urf = userroleF.find(userroleid);
+        if (userid == null) {
+            out.println("<form id=\"createForm\" name=\"createForm\" method=\"POST\">");
+            out.println("<label>UserRole ID " + userroleid + "</label>");
 
-        out.println("<label>Role ID " + userroleid + "</label>");
-        out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + urf.getUserid()+ ">");
-        out.println("<label>Regra ID " + userroleid + "</label>");
-        out.println("<input type=\"TEXT\" id=\"name\" name=\"name\" size=\"40\" value= " + urf.getRoleid() + ">");
-        out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
-        out.println("</form>");
-        out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            UserRole urf = userroleF.find(Integer.parseInt(userroleid));
 
-        out.println("<h1>Servlet EditUserRole at " + request.getContextPath() + "</h1>");
+            out.println("<label>User ID </label>");
+            out.println("<input type=\"TEXT\" id=\"userid\" name=\"userid\" size=\"40\" value= " + urf.getUserid() + ">");
+            out.println("<label>Regra ID </label>");
+            out.println("<input type=\"TEXT\" id=\"roleid\" name=\"roleid\" size=\"40\" value= " + urf.getRoleid() + ">");
+            out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
+            out.println("</form>");
+            out.println("<a href=\"index.html\">Pagina Inicial</a>");
+
+            out.println("<h1>Servlet EditUserRole at " + request.getContextPath() + "</h1>");
+        } else {
+            User u = userF.find(Integer.parseInt(userid));
+            Role r = roleF.find(Integer.parseInt(roleid));
+
+            if (u == null || r == null) {
+                out.println("<h1> Dados incorretos</h1>");
+                out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            } else {
+                UserRole o = userroleF.find(Integer.parseInt(userroleid));
+                o.setUserid(Integer.parseInt(userid));
+                o.setRoleid(Integer.parseInt(roleid));
+                userroleF.edit(o);
+                response.sendRedirect("ListUserRole");
+            }
+        }
+
         out.println("</body>");
         out.println("</html>");
 
