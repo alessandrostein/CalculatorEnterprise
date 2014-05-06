@@ -55,13 +55,18 @@ public class RemoveUser extends HttpServlet {
             out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
             out.println("</form>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
-            //out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUser?userid=IDDOUSER</h1>");
         } else {
-            User o = new User();
-            o.setId(Integer.parseInt(userid));
-            userF.remove(o);
-            out.println("<h1>Usuário removido: " + o.getName() + "</h1>");
-            response.sendRedirect("ListUser");
+            User o = userF.find(Integer.parseInt(userid));
+
+            if (o == null) {
+                out.println("<h1>Usuário incorreto.</h1>");
+                out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            } else {
+                userF.remove(o);
+                out.println("<h1>Usuário removido: " + o.getName() + "</h1>");
+                response.sendRedirect("ListUser");
+            }
+
         }
         out.println("</body>");
         out.println("</html>");

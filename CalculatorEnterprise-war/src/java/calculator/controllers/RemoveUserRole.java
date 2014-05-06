@@ -55,13 +55,18 @@ public class RemoveUserRole extends HttpServlet {
             out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
             out.println("</form>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
-            //out.println("<h1>Adicione o ID do usuario na url. Ex: RemoveUserRole?userroleid=IDDOUSERROLE</h1>");
         } else {
-            UserRole o = new UserRole();
-            o.setId(Integer.parseInt(userroleid));
-            userroleF.remove(o);
-            out.println("<h1>Removido Usuario da Regra " + o.toString() + "</h1>");
-            response.sendRedirect("ListUserRole");
+            UserRole o = userroleF.find(Integer.parseInt(userroleid));
+
+            if (o == null) {
+                out.println("<h1>ID incorreto.</h1>");
+                out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            } else {
+                userroleF.remove(o);
+                out.println("<h1>Removido Usuario da Regra " + o.toString() + "</h1>");
+                response.sendRedirect("ListUserRole");
+            }
+
         }
         out.println("</body>");
         out.println("</html>");

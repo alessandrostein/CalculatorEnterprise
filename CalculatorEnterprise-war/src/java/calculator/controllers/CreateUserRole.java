@@ -69,30 +69,21 @@ public class CreateUserRole extends HttpServlet {
             out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
             out.println("</form>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
-
-            //out.println("<h1>Adicione o ID do usuario e da Role na url. Ex: CreateUserRole?userid=IDDAUSER&roleid=IDDAROLE</h1>");
         } else {
-            /*User u = new User();
-            u.setId(Integer.parseInt(userid));
+            User u = userF.find(Integer.parseInt(userid));
+            Role r = roleF.find(Integer.parseInt(roleid));
 
-            u = userF.find(u);
-
-            Role r = new Role();
-            r.setId(Integer.parseInt(roleid));
-
-            r = roleF.find(r);
-            if (u == null || r == null) {*/
-
+            if (u == null || r == null) {
+                out.println("<h1> Dados incorretos</h1>");
+                out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            } else {
                 UserRole o = new UserRole();
                 o.setUserid(Integer.parseInt(userid));
                 o.setRoleid(Integer.parseInt(roleid));
                 userroleF.create(o);
                 out.println("<h1>Regra adicionado ao usuario: </h1>");
                 response.sendRedirect("ListUserRole");
-        /*    } else {
-                out.println("<h1> Dados incorretos</h1>");
-                out.println("<a href=\"index.html\">Pagina Inicial</a>");
-            }*/
+            }
 
         }
 

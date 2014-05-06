@@ -55,13 +55,18 @@ public class RemoveRole extends HttpServlet {
             out.println("<button type=\"submit\" name=\"btn\" value=\"val\">Enviar</button>");
             out.println("</form>");
             out.println("<a href=\"index.html\">Pagina Inicial</a>");
-            //out.println("<h1>Adicione o ID da regra na url. Ex: RemoveRole?roleid=IDDAROLE</h1>");
         } else {
-            Role o = new Role();
-            o.setId(Integer.parseInt(roleid));
-            roleF.remove(o);
-            out.println("<h1>Regra removida: " + o.getName() + "</h1>");
-            response.sendRedirect("ListRole");
+            Role o = roleF.find(Integer.parseInt(roleid));
+
+            if (o == null) {
+                out.println("<h1>Regra incorreta.</h1>");
+                out.println("<a href=\"index.html\">Pagina Inicial</a>");
+            } else {
+                roleF.remove(o);
+                out.println("<h1>Regra removida: " + o.getName() + "</h1>");
+                response.sendRedirect("ListRole");
+            }
+
         }
         out.println("</body>");
         out.println("</html>");
