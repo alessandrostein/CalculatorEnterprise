@@ -5,14 +5,17 @@
         <group>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/RemoveRole.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/ListRole.java</file>
-            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/CreateUser.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/ListUserRole.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/web/index.html</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/EditUserRole.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/CreateRole.java</file>
-            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/ListUser.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/SomarServlet.java</file>
-            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/RemoveUser.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/RemoveUserRole.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/CreateUser.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/EditRole.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/ListUser.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/EditUser.java</file>
+            <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/RemoveUser.java</file>
             <file>file:/home/alessandro/gitrepo/CalculatorEnterprise/CalculatorEnterprise-war/src/java/calculator/controllers/CreateUserRole.java</file>
         </group>
     </open-files>

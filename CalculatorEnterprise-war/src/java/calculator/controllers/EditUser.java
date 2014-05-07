@@ -67,7 +67,7 @@ public class EditUser extends HttpServlet {
             User uf = userF.find(Integer.parseInt(userid));
             uf.setName(name);
             userF.edit(uf);
-            response.sendRedirect("ListRole");
+            response.sendRedirect("ListUser");
         }
         
         out.println("</body>");
